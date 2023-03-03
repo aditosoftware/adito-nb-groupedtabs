@@ -29,7 +29,8 @@ public final class SelectGroupAction extends AbstractAction implements Presenter
   @Override
   public void actionPerformed(ActionEvent e)
   {
-    assert false;
+    // actionPerformed cannot be called on a PopUp action
+    throw new UnsupportedOperationException("invalid call to SelectGroupAction.actionPerformed inside a PopUp action");
   }
 
   @Override
