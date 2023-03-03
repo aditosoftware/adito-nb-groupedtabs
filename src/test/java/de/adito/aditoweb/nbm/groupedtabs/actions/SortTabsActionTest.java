@@ -1,6 +1,6 @@
 package de.adito.aditoweb.nbm.groupedtabs.actions;
 
-import de.adito.nbm.groupedtabs.api.IDataObjectGroupProvider;
+import de.adito.aditoweb.nbm.groupedtabs.api.IDataObjectGroupProvider;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
