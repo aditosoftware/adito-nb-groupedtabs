@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # path to nbp_userdir
 if [[ -z "$ADITODESIGNER_USERDIR" ]]; then
   echo "ADITODESIGNER_USERDIR is not set"
