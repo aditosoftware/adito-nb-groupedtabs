@@ -1,5 +1,6 @@
 package de.adito.aditoweb.nbm.groupedtabs;
 
+import lombok.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -9,13 +10,14 @@ import java.awt.*;
  *
  * @author p.neub, 28.02.2023
  */
-public interface IGroup
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class Group
 {
-  Object PROP_GROUP = new Object();
+  public static final Object PROP_GROUP = new Object();
 
-  Color FALLBACK = Color.WHITE;
+  public static final Color FALLBACK = Color.WHITE;
 
-  Color[] ALL = new Color[]{
+  public static final Color[] ALL = new Color[]{
       Color.decode("#A8071A"),
       Color.decode("#AD2102"),
       Color.decode("#AD4E00"),
@@ -40,7 +42,7 @@ public interface IGroup
       Color.decode("#061178"),
       Color.decode("#22075E"),
       Color.decode("#780650"),
-  };
+      };
 
   /**
    * Computes the corrosponding color for the specified group.
@@ -49,9 +51,9 @@ public interface IGroup
    * @param pGroup the group
    * @return the color for the group
    */
-  static Color colorForGroup(@NotNull String pGroup)
+  public static Color colorForGroup(@NotNull String pGroup)
   {
     // Math.abs will overflow and return a negative value if pHash is Integer.MIN_VALUE
-    return IGroup.ALL[(pGroup.hashCode() & 0xfffffff) % IGroup.ALL.length];
+    return Group.ALL[(pGroup.hashCode() & 0xfffffff) % Group.ALL.length];
   }
 }

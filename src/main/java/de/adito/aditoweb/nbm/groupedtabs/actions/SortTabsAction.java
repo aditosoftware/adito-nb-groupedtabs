@@ -60,7 +60,7 @@ public final class SortTabsAction implements ActionListener
         .map(pTc -> Pair.of(pTc, Optional.ofNullable(pTc.getLookup().lookup(DataObject.class))))
 
         // group by the group of the TopComponent
-        .collect(Collectors.groupingBy(pPair -> Optional.ofNullable((String) pPair.first().getClientProperty(IGroup.PROP_GROUP))
+        .collect(Collectors.groupingBy(pPair -> Optional.ofNullable((String) pPair.first().getClientProperty(Group.PROP_GROUP))
             .or(() -> pPair.second().flatMap(groupProvider::group))))
 
         // get entries as keyvalue pairs and stream over them

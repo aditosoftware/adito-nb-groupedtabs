@@ -29,13 +29,13 @@ public final class GroupingTabDecorator extends TabDecorator
         .map(TopComponent.class::cast)
 
         // check for IGroup.PROP_GROUP, otherwise return the grup using IDataObjectGroupProvider
-        .flatMap(tc -> Optional.ofNullable((String) tc.getClientProperty(IGroup.PROP_GROUP))
+        .flatMap(tc -> Optional.ofNullable((String) tc.getClientProperty(Group.PROP_GROUP))
             .or(() -> Optional.ofNullable(tc.getLookup().lookup(DataObject.class))
                 .flatMap(pDataObject -> IDataObjectGroupProvider.getDefault().group(pDataObject))))
 
         // get color for group and fallback to IGroup.FALLBACK, if the group could not be determined
-        .map(IGroup::colorForGroup)
-        .orElse(IGroup.FALLBACK);
+        .map(Group::colorForGroup)
+        .orElse(Group.FALLBACK);
 
     // draw color above the Tab
     g.setColor(color);

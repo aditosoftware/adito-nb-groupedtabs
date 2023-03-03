@@ -1,6 +1,6 @@
 package de.adito.aditoweb.nbm.groupedtabs.actions;
 
-import de.adito.aditoweb.nbm.groupedtabs.IGroup;
+import de.adito.aditoweb.nbm.groupedtabs.Group;
 import de.adito.nbm.groupedtabs.api.IDataObjectGroupProvider;
 import org.jetbrains.annotations.*;
 import org.openide.awt.*;
@@ -58,7 +58,7 @@ public final class SelectGroupAction extends AbstractAction implements Presenter
       final TopComponent tc = WindowManager.getDefault().getRegistry().getActivated();
 
       // Get the current group if it was explicitly set for the current TopComponent
-      final String currentGroup = (String) tc.getClientProperty(IGroup.PROP_GROUP);
+      final String currentGroup = (String) tc.getClientProperty(Group.PROP_GROUP);
 
       // add default menu item, that resets the explicit group
       final JMenuItem defaultItem = new JRadioButtonMenuItem(NbBundle.getMessage(SelectGroupAction.class, "LBL_SelectGroup_Action_DefaultItem"));
@@ -69,7 +69,7 @@ public final class SelectGroupAction extends AbstractAction implements Presenter
 
       // add menu items corrosponding to each cuurrently used group
       getGroupsInTopComponentMode(tc).forEachOrdered(pGroup -> {
-        final JMenuItem item = new ColouredJRadioButtonMenuItem(pGroup, IGroup.colorForGroup(pGroup));
+        final JMenuItem item = new ColouredJRadioButtonMenuItem(pGroup, Group.colorForGroup(pGroup));
         item.setSelected(pGroup.equals(currentGroup));
         item.addActionListener(e -> updateTopComponentGroup(tc, pGroup));
         add(item);
@@ -115,7 +115,7 @@ public final class SelectGroupAction extends AbstractAction implements Presenter
      */
     private static void updateTopComponentGroup(@NotNull TopComponent pTopComponent, @Nullable String pGroup)
     {
-      pTopComponent.putClientProperty(IGroup.PROP_GROUP, pGroup);
+      pTopComponent.putClientProperty(Group.PROP_GROUP, pGroup);
       WindowManager.getDefault().getMainWindow().repaint();
     }
   }

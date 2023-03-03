@@ -2,11 +2,12 @@ package de.adito.aditoweb.nbm.groupedtabs.actions;
 
 import de.adito.nbm.groupedtabs.api.IDataObjectGroupProvider;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
+import org.mockito.*;
 import org.openide.loaders.DataObject;
 import org.openide.util.lookup.Lookups;
 import org.openide.windows.*;
 
+import javax.swing.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,19 @@ import static org.mockito.Mockito.*;
  */
 class SelectGroupActionTest
 {
+  /**
+   * Verifies that the correct title has been set for the popup menu
+   */
+  @Test
+  void shouldHaveCorrectActionName()
+  {
+    try (MockedConstruction<SelectGroupAction.GroupingMenu> mockedGroupingMenuConstruction = mockConstruction(SelectGroupAction.GroupingMenu.class))
+    {
+      final JMenuItem menuItem = new SelectGroupAction().getPopupPresenter();
+      verify(menuItem).setText("Group");
+    }
+  }
+
   /**
    * Tests if {@link SelectGroupAction.GroupingMenu#getGroupsInTopComponentMode(TopComponent)}
    * can correctly get a sorted list of groups from the currently opened TopComponents.
