@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module-Display-Category: ADITO / UI
+OpenIDE-Module-Short-Description: Plugin that adds tab grouping support
+OpenIDE-Module-Long-Description: A Plugin which adds support for tab grouping and colouring
+  <p style="font-weight: bold;">Changelog</p>
+  <p style="font-weight: bold;">v1.0.0</p>
+  Initial Release
