@@ -6,7 +6,7 @@ if [[ -z "$ADITODESIGNER_USERDIR" ]]; then
   exit 1
 fi
 
-NAME="de-adito-aditoweb-nbm-grouped-tabs"
+NAME="de-adito-aditoweb-nbm-groupedtabs"
 
 cp "target/nbm/netbeans/extra/modules/$NAME.jar" "$ADITODESIGNER_USERDIR/modules/$NAME.jar"
 cp -r "target/nbm/netbeans/extra/modules/ext/$NAME/" "$ADITODESIGNER_USERDIR/modules/ext/"
