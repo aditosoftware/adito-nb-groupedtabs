@@ -26,32 +26,32 @@ class CloseGroupActionTest
   @Test
   void shouldCloseAllTopComponentsInGroup()
   {
-    final DataObject tc1InMode1Do = mock(DataObject.class);
-    final TopComponent tc1InMode1 = mock(TopComponent.class);
-    when(tc1InMode1.getLookup()).thenReturn(Lookups.fixed(tc1InMode1Do));
+    final DataObject firstTcInFirstModeDo = mock(DataObject.class);
+    final TopComponent firstTcInFirstMode = mock(TopComponent.class);
+    when(firstTcInFirstMode.getLookup()).thenReturn(Lookups.fixed(firstTcInFirstModeDo));
 
     final Mode mode1 = mock(Mode.class);
-    when(mode1.getTopComponents()).thenReturn(new TopComponent[]{tc1InMode1});
+    when(mode1.getTopComponents()).thenReturn(new TopComponent[]{firstTcInFirstMode});
 
 
-    final DataObject tc1InMode2Do = mock(DataObject.class);
-    final TopComponent tc1InMode2 = mock(TopComponent.class);
-    when(tc1InMode2.getLookup()).thenReturn(Lookups.fixed(tc1InMode2Do));
+    final DataObject firstTcInSecondModeDo = mock(DataObject.class);
+    final TopComponent firstTcInSecondMode = mock(TopComponent.class);
+    when(firstTcInSecondMode.getLookup()).thenReturn(Lookups.fixed(firstTcInSecondModeDo));
 
-    final DataObject tc2InMode2Do = mock(DataObject.class);
-    final TopComponent tc2InMode2 = mock(TopComponent.class);
-    when(tc2InMode2.getLookup()).thenReturn(Lookups.fixed(tc2InMode2Do));
+    final DataObject secondTcInSecondModeDo = mock(DataObject.class);
+    final TopComponent secondTcInSecondMode = mock(TopComponent.class);
+    when(secondTcInSecondMode.getLookup()).thenReturn(Lookups.fixed(secondTcInSecondModeDo));
 
-    final DataObject tc3InMode2Do = mock(DataObject.class);
-    final TopComponent tc3InMode2 = mock(TopComponent.class);
-    when(tc3InMode2.getLookup()).thenReturn(Lookups.fixed(tc3InMode2Do));
+    final DataObject tc3InSecondModeDo = mock(DataObject.class);
+    final TopComponent tc3InSecondMode = mock(TopComponent.class);
+    when(tc3InSecondMode.getLookup()).thenReturn(Lookups.fixed(tc3InSecondModeDo));
 
     final Mode mode2 = mock(Mode.class);
-    when(mode2.getTopComponents()).thenReturn(new TopComponent[]{tc1InMode2, tc2InMode2, tc3InMode2});
+    when(mode2.getTopComponents()).thenReturn(new TopComponent[]{firstTcInSecondMode, secondTcInSecondMode, tc3InSecondMode});
 
 
     final TopComponent.Registry registry = mock(TopComponent.Registry.class);
-    when(registry.getActivated()).thenReturn(tc2InMode2);
+    when(registry.getActivated()).thenReturn(secondTcInSecondMode);
 
     final WindowManager windowManager = mock(WindowManager.class);
     when(windowManager.getRegistry()).thenReturn(registry);
@@ -63,10 +63,10 @@ class CloseGroupActionTest
       windowManagerMockedStatic.when(WindowManager::getDefault).thenReturn(windowManager);
 
       final IDataObjectGroupProvider groupProvider = mock(IDataObjectGroupProvider.class);
-      when(groupProvider.group(tc1InMode1Do)).thenReturn(Optional.of("AAA"));
-      when(groupProvider.group(tc1InMode2Do)).thenReturn(Optional.of("AAA"));
-      when(groupProvider.group(tc2InMode2Do)).thenReturn(Optional.of("AAA"));
-      when(groupProvider.group(tc3InMode2Do)).thenReturn(Optional.of("BBB"));
+      when(groupProvider.group(firstTcInFirstModeDo)).thenReturn(Optional.of("AAA"));
+      when(groupProvider.group(firstTcInSecondModeDo)).thenReturn(Optional.of("AAA"));
+      when(groupProvider.group(secondTcInSecondModeDo)).thenReturn(Optional.of("AAA"));
+      when(groupProvider.group(tc3InSecondModeDo)).thenReturn(Optional.of("BBB"));
 
       try (MockedStatic<IDataObjectGroupProvider> groupProviderMockedStatic = mockStatic(IDataObjectGroupProvider.class))
       {
@@ -77,10 +77,10 @@ class CloseGroupActionTest
         action.actionPerformed(eventMock);
         verifyNoInteractions(eventMock);
 
-        verify(tc1InMode1, times(0)).close();
-        verify(tc1InMode2, times(1)).close();
-        verify(tc2InMode2, times(1)).close();
-        verify(tc3InMode2, times(0)).close();
+        verify(firstTcInFirstMode, never()).close();
+        verify(firstTcInSecondMode).close();
+        verify(secondTcInSecondMode).close();
+        verify(tc3InSecondMode, never()).close();
       }
     }
   }
