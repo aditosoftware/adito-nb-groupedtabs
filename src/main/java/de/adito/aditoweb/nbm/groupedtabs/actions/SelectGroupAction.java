@@ -1,6 +1,6 @@
 package de.adito.aditoweb.nbm.groupedtabs.actions;
 
-import de.adito.aditoweb.nbm.groupedtabs.Group;
+import de.adito.aditoweb.nbm.groupedtabs.*;
 import de.adito.nbm.groupedtabs.api.IDataObjectGroupProvider;
 import org.jetbrains.annotations.*;
 import org.openide.awt.*;
@@ -13,7 +13,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.*;
-import java.util.List;
 import java.util.stream.*;
 
 /**
@@ -23,7 +22,7 @@ import java.util.stream.*;
  */
 @ActionID(category = "Window/SelectDocumentNode", id = "de.adito.aditoweb.nbm.groupedtabs.actions.SelectGroupAction")
 @ActionRegistration(displayName = "#LBL_SelectGroup_Action")
-@ActionReference(path = "Editors/TabActions", position = -10001)
+@ActionReference(path = "Editors/TabActions", position = -10010)
 public final class SelectGroupAction extends AbstractAction implements Presenter.Popup
 {
   @Override
@@ -56,7 +55,7 @@ public final class SelectGroupAction extends AbstractAction implements Presenter
       // not nessersarry the TopComponent that the context menu was opened on.
       // Currently, there is way to do this. The same problem also applies to the NetBeans Editors Action
       // see org.netbeans.core.multiview.EditorsAction.
-      final TopComponent tc = WindowManager.getDefault().getRegistry().getActivated();
+      final TopComponent tc = NbUtils.getActiveTopComponent();
 
       // Get the current group if it was explicitly set for the current TopComponent
       final String currentGroup = (String) tc.getClientProperty(Group.PROP_GROUP);
@@ -82,19 +81,8 @@ public final class SelectGroupAction extends AbstractAction implements Presenter
     {
       final IDataObjectGroupProvider groupProvider = IDataObjectGroupProvider.getDefault();
 
-      // get all TopCompoments from each group to find the mode containing pTopComponent
-      return WindowManager.getDefault().getModes().stream()
-          .map(Mode::getTopComponents)
-          .map(Arrays::stream)
-
-          // filter if TopComponents are open and contain the current TopComponent
-          .map(pTcs -> pTcs.filter(TopComponent::isOpened).collect(Collectors.toList()))
-          .filter(pTcs -> pTcs.contains(pTopComponent))
-
-          // flatmap Stream<List<TopComponent>>
-          .findFirst()
-          .stream()
-          .flatMap(List::stream)
+      return NbUtils.getTopComponentsInMode(pTopComponent)
+          .filter(TopComponent::isOpened)
 
           // get the underlaying DataObject for the TopComponent and fetch the group using it
           .map(pTc -> pTc.getLookup().lookup(DataObject.class))

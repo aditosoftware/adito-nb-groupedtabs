@@ -8,6 +8,7 @@ import org.openide.loaders.DataObject;
 import org.openide.util.Pair;
 import org.openide.windows.*;
 
+import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
 import java.util.stream.*;
@@ -19,8 +20,11 @@ import java.util.stream.*;
  */
 @ActionID(category = "Window/SelectDocumentNode", id = "de.adito.aditoweb.nbm.groupedtabs.actions.SortTabsAction")
 @ActionRegistration(displayName = "#LBL_SortTabs_Action")
-@ActionReference(path = "Editors/TabActions", position = -10000)
-public final class SortTabsAction implements ActionListener
+@ActionReferences({
+    @ActionReference(path = "Editors/TabActions", position = -10000, separatorAfter = -10000 + 1),
+    @ActionReference(path = "Shortcuts", name = "DA-S")
+})
+public final class SortTabsAction extends AbstractAction
 {
   @Override
   public void actionPerformed(ActionEvent e)
