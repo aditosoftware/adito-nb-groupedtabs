@@ -1,7 +1,7 @@
 package de.adito.aditoweb.nbm.groupedtabs.actions;
 
 import de.adito.aditoweb.nbm.groupedtabs.NbUtils;
-import de.adito.nbm.groupedtabs.api.IDataObjectGroupProvider;
+import de.adito.aditoweb.nbm.groupedtabs.api.IDataObjectGroupProvider;
 import org.openide.awt.*;
 import org.openide.loaders.DataObject;
 import org.openide.util.*;

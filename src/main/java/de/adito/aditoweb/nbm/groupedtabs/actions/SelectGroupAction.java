@@ -1,7 +1,7 @@
 package de.adito.aditoweb.nbm.groupedtabs.actions;
 
 import de.adito.aditoweb.nbm.groupedtabs.*;
-import de.adito.nbm.groupedtabs.api.IDataObjectGroupProvider;
+import de.adito.aditoweb.nbm.groupedtabs.api.IDataObjectGroupProvider;
 import org.jetbrains.annotations.*;
 import org.openide.awt.*;
 import org.openide.loaders.DataObject;
@@ -86,6 +86,7 @@ public final class SelectGroupAction extends AbstractAction implements Presenter
 
           // get the underlaying DataObject for the TopComponent and fetch the group using it
           .map(pTc -> pTc.getLookup().lookup(DataObject.class))
+          .filter(Objects::nonNull)
           .map(groupProvider::group)
 
           // flatmap Optional

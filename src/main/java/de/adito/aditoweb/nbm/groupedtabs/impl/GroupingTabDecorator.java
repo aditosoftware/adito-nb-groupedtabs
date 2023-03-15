@@ -1,7 +1,7 @@
 package de.adito.aditoweb.nbm.groupedtabs.impl;
 
 import de.adito.aditoweb.nbm.groupedtabs.*;
-import de.adito.nbm.groupedtabs.api.IDataObjectGroupProvider;
+import de.adito.aditoweb.nbm.groupedtabs.api.IDataObjectGroupProvider;
 import org.netbeans.core.multitabs.TabDecorator;
 import org.netbeans.swing.tabcontrol.TabData;
 import org.openide.loaders.DataObject;
