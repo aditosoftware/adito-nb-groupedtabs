@@ -10,7 +10,7 @@ import org.openide.windows.*;
 import java.util.*;
 import java.util.stream.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
@@ -26,14 +26,15 @@ class NbUtilsTest
   @Test
   void shouldReturnListOfTopComponentsInMode()
   {
-    final TopComponent tc1inMode1 = mock(TopComponent.class);
-    final TopComponent tc2InMode1 = mock(TopComponent.class);
+    final TopComponent firstTcInFirstMode = mock(TopComponent.class);
+    final TopComponent secondTcInFirstMode = mock(TopComponent.class);
     final Mode mode1 = mock(Mode.class);
-    when(mode1.getTopComponents()).thenReturn(new TopComponent[]{tc1inMode1, tc2InMode1});
+    when(mode1.getTopComponents()).thenReturn(new TopComponent[]{firstTcInFirstMode, secondTcInFirstMode});
 
-    final TopComponent tc1InMode2 = mock(TopComponent.class);
-    final TopComponent tc2InMode2 = mock(TopComponent.class);
+    final TopComponent firstTcInSecondMode = mock(TopComponent.class);
+    final TopComponent secondTcInSecondMode = mock(TopComponent.class);
     final Mode mode2 = mock(Mode.class);
+    when(mode2.getTopComponents()).thenReturn(new TopComponent[]{firstTcInSecondMode, secondTcInSecondMode});
 
     final WindowManager windowManager = mock(WindowManager.class);
     //noinspection rawtypes,unchecked
@@ -43,11 +44,11 @@ class NbUtilsTest
     {
       windowManagerMockedStatic.when(WindowManager::getDefault).thenReturn(windowManager);
 
-      Set<TopComponent> tcsInMode1 = NbUtils.getTopComponentsInMode(tc2InMode1).collect(Collectors.toSet());
-      assertEquals(Set.of(tc1inMode1, tc2InMode1), tcsInMode1);
+      Set<TopComponent> tcsInMode1 = NbUtils.getTopComponentsInMode(secondTcInFirstMode).collect(Collectors.toSet());
+      assertEquals(Set.of(firstTcInFirstMode, secondTcInFirstMode), tcsInMode1);
 
-      Set<TopComponent> tcsInMode2 = NbUtils.getTopComponentsInMode(tc1InMode2).collect(Collectors.toSet());
-      assertEquals(Set.of(tc1InMode2, tc2InMode2), tcsInMode2);
+      Set<TopComponent> tcsInMode2 = NbUtils.getTopComponentsInMode(firstTcInSecondMode).collect(Collectors.toSet());
+      assertEquals(Set.of(firstTcInSecondMode, secondTcInSecondMode), tcsInMode2);
     }
   }
 
@@ -77,6 +78,6 @@ class NbUtilsTest
     when(tcWithoutDataObject.getLookup()).thenReturn(Lookups.fixed());
 
     List<Pair<TopComponent, DataObject>> grouped = NbUtils.resolveDataObjects(tcWithoutDataObject).collect(Collectors.toList());
-    assertEquals(List.of(), grouped);
+    assertTrue(grouped.isEmpty());
   }
 }
