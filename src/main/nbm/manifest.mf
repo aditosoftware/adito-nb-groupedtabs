@@ -4,5 +4,11 @@ OpenIDE-Module-Display-Category: ADITO / UI
 OpenIDE-Module-Short-Description: Plugin that adds tab grouping support
 OpenIDE-Module-Long-Description: A Plugin which adds support for tab grouping and colouring
   <p style="font-weight: bold;">Changelog</p>
+    <p style="font-weight: bold;">v2.0.0</p>
+      <p style="margin-left: 10px; font-weight: bold;">MAJOR</p>
+         <ul>
+           <li>Entities and views are grouped within the same group</li>
+           <li>Different process types are grouped in their own group</li>
+         </ul>
   <p style="font-weight: bold;">v1.0.0</p>
   Initial Release

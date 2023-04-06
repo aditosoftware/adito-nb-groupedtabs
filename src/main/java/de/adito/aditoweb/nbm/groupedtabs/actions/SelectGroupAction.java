@@ -86,6 +86,7 @@ public final class SelectGroupAction extends AbstractAction implements Presenter
 
           // get the underlaying DataObject for the TopComponent and fetch the group using it
           .map(pTc -> pTc.getLookup().lookup(DataObject.class))
+          .filter(Objects::nonNull)
           .map(groupProvider::group)
 
           // flatmap Optional
