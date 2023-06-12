@@ -1,7 +1,6 @@
 package de.adito.aditoweb.nbm.groupedtabs;
 
 import lombok.*;
-import org.jetbrains.annotations.NotNull;
 import org.openide.loaders.DataObject;
 import org.openide.util.Pair;
 import org.openide.windows.*;
@@ -25,7 +24,7 @@ public class NbUtils
    *
    * @return the currently active TopComponent
    */
-  @NotNull
+  @NonNull
   public static TopComponent getActiveTopComponent()
   {
     // Get the current TopComponent, note that this is the currently active TopComponent,
@@ -41,7 +40,7 @@ public class NbUtils
    * @param pTopComponentWithinMode a TopComponent
    * @return Stream of TopComponents inside the mode of {@code pTcWithinMode}
    */
-  public static Stream<TopComponent> getTopComponentsInMode(@NotNull TopComponent pTopComponentWithinMode)
+  public static Stream<TopComponent> getTopComponentsInMode(@NonNull TopComponent pTopComponentWithinMode)
   {
     // get all TopCompoments from each group to find the mode containing pTopComponent
     return WindowManager.getDefault().getModes().stream()
@@ -65,7 +64,7 @@ public class NbUtils
    * @param pTopComponent the TopComponent
    * @return stream with one pair of the TopComponent and its DataObject or an empty stream
    */
-  public static Stream<Pair<TopComponent, DataObject>> resolveDataObjects(@NotNull TopComponent pTopComponent)
+  public static Stream<Pair<TopComponent, DataObject>> resolveDataObjects(@NonNull TopComponent pTopComponent)
   {
     return Optional.ofNullable(pTopComponent.getLookup().lookup(DataObject.class))
         .map(pDataObject -> Pair.of(pTopComponent, pDataObject))

@@ -1,6 +1,6 @@
 package de.adito.aditoweb.nbm.groupedtabs;
 
-import org.jetbrains.annotations.NotNull;
+import lombok.NonNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -25,7 +25,7 @@ public class GroupTest
    */
   @ParameterizedTest
   @ValueSource(strings = {"MyEntity", "MyView", "MyContext", "SomeProcess", "Foo", "Bar"})
-  void shouldAlwaysComputeTheSameColorForTheSameGroup(@NotNull String pGroup)
+  void shouldAlwaysComputeTheSameColorForTheSameGroup(@NonNull String pGroup)
   {
     final Color color = Group.colorForGroup(pGroup);
     for (int i = 0; i < 100; i++)

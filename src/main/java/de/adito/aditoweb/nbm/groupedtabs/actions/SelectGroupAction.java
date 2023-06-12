@@ -2,6 +2,7 @@ package de.adito.aditoweb.nbm.groupedtabs.actions;
 
 import de.adito.aditoweb.nbm.groupedtabs.*;
 import de.adito.nbm.groupedtabs.api.IDataObjectGroupProvider;
+import lombok.NonNull;
 import org.jetbrains.annotations.*;
 import org.openide.awt.*;
 import org.openide.loaders.DataObject;
@@ -76,8 +77,8 @@ public final class SelectGroupAction extends AbstractAction implements Presenter
       });
     }
 
-    @NotNull
-    static Stream<String> getGroupsInTopComponentMode(@NotNull TopComponent pTopComponent)
+    @NonNull
+    static Stream<String> getGroupsInTopComponentMode(@NonNull TopComponent pTopComponent)
     {
       final IDataObjectGroupProvider groupProvider = IDataObjectGroupProvider.getDefault();
 
@@ -103,7 +104,7 @@ public final class SelectGroupAction extends AbstractAction implements Presenter
      * @param pTopComponent the target {@link TopComponent}
      * @param pGroup        the group that should be explicitly set for the {@link TopComponent}
      */
-    private static void updateTopComponentGroup(@NotNull TopComponent pTopComponent, @Nullable String pGroup)
+    private static void updateTopComponentGroup(@NonNull TopComponent pTopComponent, @Nullable String pGroup)
     {
       pTopComponent.putClientProperty(Group.PROP_GROUP, pGroup);
       WindowManager.getDefault().getMainWindow().repaint();
@@ -125,7 +126,7 @@ public final class SelectGroupAction extends AbstractAction implements Presenter
      * @param pText  the text of the menu item
      * @param pColor the color indicator of the menu item
      */
-    public ColouredJRadioButtonMenuItem(@NotNull String pText, @NotNull Color pColor)
+    public ColouredJRadioButtonMenuItem(@NonNull String pText, @NonNull Color pColor)
     {
       super(pText);
       setBorder(BorderFactory.createEmptyBorder(0, 0, 0, COLOR_RECT_WIDTH));

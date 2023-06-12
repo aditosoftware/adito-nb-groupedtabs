@@ -1,7 +1,6 @@
 package de.adito.aditoweb.nbm.groupedtabs;
 
 import lombok.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -51,7 +50,7 @@ public class Group
    * @param pGroup the group
    * @return the color for the group
    */
-  public static Color colorForGroup(@NotNull String pGroup)
+  public static Color colorForGroup(@NonNull String pGroup)
   {
     // Math.abs will overflow and return a negative value if pHash is Integer.MIN_VALUE
     return Group.ALL[(pGroup.hashCode() & 0xfffffff) % Group.ALL.length];
