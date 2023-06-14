@@ -2,7 +2,7 @@ package de.adito.aditoweb.nbm.groupedtabs.actions;
 
 import de.adito.aditoweb.nbm.groupedtabs.*;
 import de.adito.nbm.groupedtabs.api.IDataObjectGroupProvider;
-import org.jetbrains.annotations.NotNull;
+import lombok.NonNull;
 import org.openide.awt.*;
 import org.openide.loaders.DataObject;
 import org.openide.util.Pair;
@@ -51,8 +51,8 @@ public final class SortTabsAction extends AbstractAction
    * @param pTopComponents array of TopComponents that should be sorted
    * @return sorted list of all opened TopComponents provided through {@code pTopComponents}
    */
-  @NotNull
-  static List<TopComponent> getSortedOpenedTopComponents(@NotNull TopComponent[] pTopComponents)
+  @NonNull
+  static List<TopComponent> getSortedOpenedTopComponents(@NonNull TopComponent[] pTopComponents)
   {
     final IDataObjectGroupProvider groupProvider = IDataObjectGroupProvider.getDefault();
 
