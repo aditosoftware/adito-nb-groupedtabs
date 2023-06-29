@@ -1,6 +1,6 @@
 package de.adito.aditoweb.nbm.groupedtabs.actions;
 
-import de.adito.aditoweb.nbm.groupedtabs.*;
+import de.adito.aditoweb.nbm.groupedtabs.Group;
 import de.adito.nbm.groupedtabs.api.IDataObjectGroupProvider;
 import lombok.NonNull;
 import org.openide.awt.*;
@@ -9,9 +9,9 @@ import org.openide.util.Pair;
 import org.openide.windows.*;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
 
 /**
  * Action that sorts all tabs in the current {@link Mode}.
@@ -52,7 +52,7 @@ public final class SortTabsAction extends AbstractAction
    * @return sorted list of all opened TopComponents provided through {@code pTopComponents}
    */
   @NonNull
-  static List<TopComponent> getSortedOpenedTopComponents(@NonNull TopComponent[] pTopComponents)
+  static List<TopComponent> getSortedOpenedTopComponents(TopComponent @NonNull [] pTopComponents)
   {
     final IDataObjectGroupProvider groupProvider = IDataObjectGroupProvider.getDefault();
 
